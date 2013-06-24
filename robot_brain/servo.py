@@ -20,8 +20,8 @@ class Servo(object):
 
     def __init__(self, pin=0, min=70, max=230):
         self.pin = pin
-        self.min = 70
-        self.max = 230
+        self.min = min
+        self.max = max
         
         if not self._servoblaster_module_loaded():
             self._load_servoblaster()
