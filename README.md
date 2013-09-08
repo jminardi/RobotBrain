@@ -16,6 +16,7 @@ Dependencies
 
 * PiBits
     + PiBits is used to drive servos 
+
     ```
     git clone https://github.com/richardghirst/PiBits                                 
     cd ServoBlaster/user                                                              
@@ -30,9 +31,9 @@ Dependencies
 
 Installation
 ------------
-    ```
-    sudo python setup.py install
-    ```
+```
+sudo python setup.py install
+```
 
 
 TODO
