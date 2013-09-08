@@ -1,24 +1,14 @@
 This is a simple python package written to remotely control a toy car. It was
 developed on and written for the Raspbery Pi.
 
-Servo control is accomplished through the ServoBlaster kernal module (using
-jronald's fork): https://github.com/jronald/PiBits
-
-Install
--------
-    sudo python setup.py develop
-
 Starting the Server
 -------------------
-    >> from robot_brain.car_server import CarServer
+    >> from robot_brain.servers.car_server import CarServer
     >> server = CarServer()
 
 Stopping the Server
 -------------------
     >> server.stop()
-
-NOTE: Due to a threading issue your python process will probably need to be
-exited with ctrl-z
 
 More Information
 ----------------
@@ -34,9 +24,8 @@ a DC motor connected to pins 18 and 24:
 
     >> server = CarServer(motor_pins=(18, 24), servo_pin=1, port=2000)
 
-TODO
-----
-* [ ] Make `Motor` confirm to the Actuator Interface
-* [ ] Allow passing of command line arguments to `sensor_client`
-* [ ] Update Pin tests
-* [ ] Add more tests!
+See Also
+--------
+The client side Android software that communicates with this server:
+
+https://github.com/jminardi/RobotBrain-Controller

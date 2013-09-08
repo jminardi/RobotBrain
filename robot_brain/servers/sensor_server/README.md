@@ -17,4 +17,4 @@ On another computer with network access to the pi launch the client. The IP
 should be the IP of the Pi, and the port should be the same as the port opened
 on the Pi.
 
-    python -m robot_brain.server.sensor_server.sensor_client --port=2000 --ip=192.168.1.80
+    python -m robot_brain.servers.sensor_server.sensor_client --port=2000 --ip=192.168.1.80
