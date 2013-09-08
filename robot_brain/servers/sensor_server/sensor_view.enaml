@@ -1,0 +1,173 @@
+from enaml.layout.api import grid, hbox, vbox, spacer
+from enaml.widgets.api import (EnableCanvas, Window, Container, Label, Slider,
+        Html, MPLCanvas, PushButton)
+
+
+enamldef SensorViewWindow(Window): win:
+    attr io_controller
+
+    Container: cont:
+        hug_height = 'ignore'
+        constraints << [
+                hbox(
+                    # Column 1
+                    vbox(
+                        x_plot,
+                        y_plot,
+                        z_plot,
+                        c_plot,
+                        d_plot,
+                        p_plot,
+                        ),
+
+                    # Column 2
+                    vbox(
+                        acc_x,
+                        acc_y,
+                        acc_z,
+                        switch,
+                        distance,
+                        potentiometer,
+                        ),
+
+                    # Column 3
+                    vbox(
+                        links,
+                        ),
+
+                    # Column 4
+                    vbox(
+                        logo,
+                        spacer,
+                        hbox(led, led_slider),
+                        hbox(servo, servo_slider),
+                        hbox(motor, motor_slider),
+                        ),
+                    ),
+
+                x_plot.height == y_plot.height,
+                x_plot.height == z_plot.height,
+                x_plot.height == c_plot.height,
+                x_plot.height == d_plot.height,
+                x_plot.height == p_plot.height,
+
+                acc_x.width == 150,
+                acc_x.v_center == x_plot.v_center,
+                acc_y.v_center == y_plot.v_center,
+                acc_z.v_center == z_plot.v_center,
+                switch.v_center == c_plot.v_center,
+                distance.v_center == d_plot.v_center,
+                potentiometer.v_center == p_plot.v_center,
+
+                led_slider.height == x_plot.height,
+                servo_slider.height == y_plot.height,
+                motor_slider.height == x_plot.height,
+                links.width == 200,
+
+                logo.width == 350,
+                logo.height == 350,
+                led.width == servo.width,
+                led.width == motor.width,
+            ]
+
+        ### Column 1  #########################################################
+
+        EnableCanvas: x_plot:
+            component = io_controller.acc_x_plot
+        EnableCanvas: y_plot:
+            component = io_controller.acc_y_plot
+        EnableCanvas: z_plot:
+            component = io_controller.acc_z_plot
+        EnableCanvas: c_plot:
+            component = io_controller.switch_plot
+        EnableCanvas: d_plot:
+            component = io_controller.distance_plot
+        EnableCanvas: p_plot:
+            component = io_controller.pot_plot
+        PushButton:
+            text = 'breakpoint'
+            clicked ::
+                io_controller.clicked(win)
+
+        ### Column 2  #########################################################
+
+        Container: acc_x:
+            constraints <<[hbox(nx, spacer, lx)]
+            Label: nx:
+                hug_height = 'ignore'
+                text << str(io_controller.acc_x)
+            Label: lx:
+                hug_height = 'ignore'
+                text << '<b>X</b>'
+        Container: acc_y:
+            constraints <<[hbox(ny, spacer, ly)]
+            Label: ny:
+                hug_height = 'ignore'
+                text << str(io_controller.acc_y)
+            Label: ly:
+                hug_height = 'ignore'
+                text << '<b>Y</b>'
+        Container: acc_z:
+            constraints <<[hbox(nz, spacer, lz)]
+            Label: nz:
+                hug_height = 'ignore'
+                text << str(io_controller.acc_z)
+            Label: lz:
+                hug_height = 'ignore'
+                text << '<b>Z</b>'
+        Container: switch:
+            constraints <<[hbox(nc, spacer, lc)]
+            Label: nc:
+                hug_height = 'ignore'
+                text << '{:.0f}'.format(io_controller.switch)
+            Label: lc:
+                hug_height = 'ignore'
+                text << '<b>Switch</b>'
+        Container: distance:
+            constraints <<[hbox(nd, spacer, ld)]
+            Label: nd:
+                hug_height = 'ignore'
+                text << '{:.2f}'.format(io_controller.distance)
+            Label: ld:
+                hug_height = 'ignore'
+                text << '<b>Distance</b>'
+        Container: potentiometer:
+            constraints <<[hbox(np, spacer, lp)]
+            Label: np:
+                hug_height = 'ignore'
+                text << '{:.2f}'.format(io_controller.potentiometer)
+            Label: lp:
+                hug_height = 'ignore'
+                text << '<b>Pot</b>'
+
+        ### Column 2  #########################################################
+
+        EnableCanvas: links:
+            hug_height = 'ignore'
+            component = io_controller.link_plot
+
+        ### Column 3  #########################################################
+
+        MPLCanvas: logo:
+            figure = io_controller.logo_plot
+        Label: led:
+            hug_height = 'ignore'
+            text = '<b>Led</b>'
+        Label: servo:
+            hug_height = 'ignore'
+            text = '<b>Servo</b>'
+        Label: motor:
+            hug_height = 'ignore'
+            text = '<b>Motor</b>'
+
+        ### Column 4  #########################################################
+
+        Slider: led_slider:
+            hug_height = 'ignore'
+            value := io_controller.led
+        Slider: servo_slider:
+            hug_height = 'ignore'
+            value := io_controller.servo
+        Slider: motor_slider:
+            hug_height = 'ignore'
+            value := io_controller.motor
