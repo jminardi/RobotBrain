@@ -35,12 +35,12 @@ class PWMActuator(object):
         self.pin_number = pin_number  # Read Only
         self.period = period
         self.value = 0.0  # Read Only
-        self.range(0, 1)
+        self.range = (0, 1)
         self._thread = threading.Thread(target=self._worker)
         self._stopped = True
 
         io.setmode(mode)
-        io.setup(pin_number, in_out)
+        io.setup(pin_number, io.OUT)
         self._thread.start()
 
     def set(self, value):
