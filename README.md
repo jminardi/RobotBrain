@@ -9,26 +9,31 @@ Dependencies
     + (Most OSs come preinstalled with this)
 
 * spidev
-
+    ```
     git clone git://github.com/doceme/py-spidev                                       
     sudo python setup.py install  
+    ```
 
 * PiBits
-    + PiBits is used to drive servos
-    
+    + PiBits is used to drive servos 
+
+    ```
     git clone https://github.com/richardghirst/PiBits                                 
     cd ServoBlaster/user                                                              
     # edit out pins that are not needed in servod.c
     make servod  
+    ```
 
 * ZMQ
-
+    ```
     sudo apt-get install python-zmq
+    ```
 
 Installation
 ------------
-
-    sudo python setup.py install
+```
+sudo python setup.py install
+```
 
 
 TODO
