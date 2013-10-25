@@ -4,7 +4,7 @@ import threading
 
 import zmq
 
-from robot_brain.sensors import MCP3007AnalogSensor, PingSensor
+from robot_brain.sensors import MCP3008AnalogSensor, PingSensor
 from robot_brain.actuators import PWMActuator, ServoActuator
 
 
@@ -25,9 +25,9 @@ class SensorServer(object):
         """ Initialize and start threads. """
 
         # Sensors
-        self.acc = MCP3007AnalogSensor([0, 1, 2], range=(100, 800))
-        self.pot = MCP3007AnalogSensor([3])
-        self.switch = MCP3007AnalogSensor([4])
+        self.acc = MCP3008AnalogSensor([0, 1, 2], range=(100, 800))
+        self.pot = MCP3008AnalogSensor([3])
+        self.switch = MCP3008AnalogSensor([4])
         self.ping = PingSensor(25, 24)
 
         # Actuators
