@@ -30,8 +30,8 @@ sensor's current reading normalized to be between 0 and 1.
 
 __Currently Implemented Sensors:__
 
-* PingSensor (HC-SR04)
-* MCP3008AnalogSensor (ADC chip for reading analog sensors)
+* `PingSensor` (HC-SR04)
+* `MCP3008AnalogSensor` (ADC chip for reading analog sensors)
 
 Dependencies
 ------------
