@@ -1,5 +1,5 @@
-import numpy as np
 import json
+import sys
 import threading
 
 import enaml
@@ -10,8 +10,8 @@ from io_controller import IOController
 
 class SensorApp(object):
 
-    def __init__(self, ip='192.168.43.48', port=2019):
-    #def __init__(self, ip='192.168.1.80', port=2015):
+    #def __init__(self, ip='192.168.43.48', port=2019):
+    def __init__(self, ip='192.168.1.80', port=2024):
         self.ip = ip
         self.port = port
 
@@ -30,7 +30,8 @@ class SensorApp(object):
         self._run = False
 
     def _sensor_client_worker(self):
-        # XXX Mock sensor values:
+        ## XXX Mock sensor values
+        #import numpy as np
         #while self._run:
         #    updates = {'acc_x': int(np.random.random() * 1024),
         #                   'acc_y': int(np.random.random() * 1024),
@@ -72,7 +73,8 @@ if __name__ == '__main__':
     from enaml.stdlib.sessions import show_simple_view
     with enaml.imports():
         from sensor_view import SensorViewWindow
-    sensor_app = SensorApp()
+    ip, port = sys.argv[1].split(':')
+    sensor_app = SensorApp(ip=ip, port=port)
     window = SensorViewWindow(io_controller=sensor_app.io_controller)
     show_simple_view(window)
     sensor_app.stop()

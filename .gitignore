@@ -1,5 +1,6 @@
 *.py[cod]
 .*.sw[mnop]
+*.enamlc
 
 # C extensions
 *.so
