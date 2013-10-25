@@ -1,3 +1,4 @@
+import time
 import RPi.GPIO as io
 
 
@@ -9,6 +10,7 @@ class PingSensor(object):
         self.range = range
         self.num_values = 1
 
+        io.setmode(io.BCM)
         io.setup(trigger, io.OUT)
         io.setup(echo, io.IN)
 
