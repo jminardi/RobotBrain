@@ -1,5 +1,8 @@
 import spidev
 
+spi = spidev.SpiDev()
+spi.open(0,0)
+
 
 class MCP3008AnalogSensor(object):
 
@@ -16,16 +19,15 @@ class MCP3008AnalogSensor(object):
         spi.open(0, 0)
 
     def read(self):
-        return [self._read_adc(pin) for chan in self.channels]
+        return [self._read_adc(chan) for chan in self.channels]
 
     def read_normalized(self):
         min, max = self.range
         return [(val - min) / float(max) for val in self.read()]
 
-    def _read_adc(self, adcnum):
+    def _read_adc(self, channel):
         """ Read SPI data from MCP3008 chip.
         """
-        channel = self.channel
         r = spi.xfer2([1, (8 + channel) << 4, 0])
-        adcout = ((r[1] & 3) << 8) + r[2]
-        return adcout
+        adc_value = ((r[1] & 3) << 8) + r[2]
+        return adc_value
