@@ -40,7 +40,7 @@ class ServoActuator(object):
     def set_normalized(self, val):
         min, max = self.range
         scale = max - min
-        speed = min + int(position * range)
+        speed = min + int(val * scale)
         self.set(speed)
 
     def start(self):

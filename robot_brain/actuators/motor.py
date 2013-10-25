@@ -1,6 +1,6 @@
 import RPi.GPIO as io
 
-from pin import Pin
+from robot_brain.gpio_pin import GPIOPin
 
 
 class Motor(object):
@@ -12,8 +12,8 @@ class Motor(object):
         io.setup(pin1, io.OUT)
         io.setup(pin2, io.OUT)
 
-        self.Pin1 = Pin(pin1)
-        self.Pin2 = Pin(pin2)
+        self.Pin1 = GPIOPin(pin1)
+        self.Pin2 = GPIOPin(pin2)
 
     def drive_forward(self):
         io.output(self.pin1, io.HIGH)

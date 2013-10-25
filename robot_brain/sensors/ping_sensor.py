@@ -44,7 +44,7 @@ class PingSensor(object):
 
         # Cap value at 100
         if distance > 100:
-        distance = 100
+            distance = 100
 
         return distance,
 
