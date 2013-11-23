@@ -13,9 +13,9 @@ class PWMActuator(object):
 
     Attributes
     ----------
-    pin_number : int
+    pin_number : int (readonly)
+    value : float (0.0 - 1.0) (readonly)
     period : float
-    value : float (0.0 - 1.0)
 
     """
 
