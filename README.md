@@ -68,6 +68,6 @@ sudo python setup.py install
 
 TODO
 ----
-* [ ] Make `Motor` confirm to the Actuator Interface
+* [x] Make `Motor` confirm to the Actuator Interface
 * [ ] Update Pin tests
 * [ ] Add more tests!
